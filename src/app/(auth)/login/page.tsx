@@ -46,9 +46,12 @@ export default function LoginPage() {
                 </Button>
               </form>
 
-            <div className="mt-8 pt-8 border-t border-neutral-200">
+            <div className="mt-8 pt-8 border-t border-neutral-200 space-y-4">
               <form action={async () => { "use server"; await signIn("google"); }}>
                 <Button type="submit" variant="outline" className="w-full py-6 text-lg">Continue with Google</Button>
+              </form>
+              <form action={async () => { "use server"; await signIn("apple"); }}>
+                <Button type="submit" variant="outline" className="w-full py-6 text-lg">Continue with Apple</Button>
               </form>
             </div>
           </Container>
