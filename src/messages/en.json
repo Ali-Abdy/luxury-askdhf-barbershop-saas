@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "booking": "Book Appointment"
+  },
+  "hero": {
+    "title": "Refined Artistry, Timeless Style",
+    "subtitle": "The Ultimate Grooming Experience",
+    "cta": "Book Appointment"
+  }
+}

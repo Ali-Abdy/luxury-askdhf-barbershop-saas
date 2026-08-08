@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "about": "Über uns",
+    "services": "Leistungen",
+    "gallery": "Galerie",
+    "contact": "Kontakt",
+    "booking": "Termin buchen"
+  },
+  "hero": {
+    "title": "Raffinierte Kunstfertigkeit, Zeitloser Stil",
+    "subtitle": "Das ultimative Pflege-Erlebnis",
+    "cta": "Termin buchen"
+  }
+}
