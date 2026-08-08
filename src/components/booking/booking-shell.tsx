@@ -56,14 +56,14 @@ export function BookingInterface() {
   const handleConfirm = async () => {
     setLoading(true);
     try {
-      await createAppointment("user-id-placeholder", {
+      await createAppointment({
         serviceId: formData.serviceId,
         barberId: formData.barberId,
         startTime: new Date(`${formData.date.toDateString()} ${formData.time}`),
       });
       alert("Booking confirmed!");
-    } catch (err) {
-      alert("Booking failed.");
+    } catch (err: any) {
+      alert(err.message || "Booking failed.");
     } finally {
       setLoading(false);
     }

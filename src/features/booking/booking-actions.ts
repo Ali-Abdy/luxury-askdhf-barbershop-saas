@@ -3,6 +3,7 @@ import 'server-only';
 
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import { auth } from "@/auth";
 
 export const getAvailableServices = async () => {
   return await prisma.service.findMany({
@@ -58,10 +59,16 @@ const appointmentSchema = z.object({
 });
 
 export const createAppointment = async (
-  customerId: string,
   data: z.infer<typeof appointmentSchema>
 ) => {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+
   const validated = appointmentSchema.parse(data);
+
+  if (validated.startTime < new Date()) {
+    throw new Error("Cannot book in the past");
+  }
 
   const service = await prisma.service.findUniqueOrThrow({
     where: { id: validated.serviceId },
@@ -93,7 +100,7 @@ export const createAppointment = async (
       ...validated,
       endTime,
       totalPrice: service.price,
-      customerId,
+      customerId: session.user.id,
       status: "PENDING",
     },
   });
