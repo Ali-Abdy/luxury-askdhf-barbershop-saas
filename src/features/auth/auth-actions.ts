@@ -11,7 +11,14 @@ const signupSchema = z.object({
 });
 
 export async function signUp(data: z.infer<typeof signupSchema>) {
-  const { name, email, password } = signupSchema.parse(data);
+  const validated = signupSchema.safeParse(data);
+  if (!validated.success) return { success: false, error: "Invalid data" };
+
+  const { name, email, password } = validated.data;
+  const existingUser = await prisma.user.findUnique({ where: { email: email.toLowerCase() } });
+
+  if (existingUser) return { success: false, error: "Email already exists" };
+
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = await prisma.user.create({
@@ -24,3 +31,4 @@ export async function signUp(data: z.infer<typeof signupSchema>) {
   });
   return { success: true, userId: user.id };
 }
+
