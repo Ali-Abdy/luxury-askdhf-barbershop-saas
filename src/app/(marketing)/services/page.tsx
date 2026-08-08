@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from 'next-intl';
 
 export const metadata: Metadata = {
   title: "Services | Luxury Barbershop",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
+  const t = useTranslations('nav');
   return (
     <PageWrapper>
       <AnimatedPage>
